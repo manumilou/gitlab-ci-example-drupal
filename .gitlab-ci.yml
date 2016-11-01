@@ -6,8 +6,8 @@ make:
   services: 
     - mysql
   variables:
-    - MYSQL_DATABASE: el_duderino
-    - MYSQL_ROOT_PASSWORD: EedaeJ5ewohghe9echah7ahJ
+    MYSQL_DATABASE: el_duderino
+    MYSQL_ROOT_PASSWORD: EedaeJ5ewohghe9echah7ahJ
   script:
     - drush make -y --translations=fr build-8.x.make src/drupal
     - cd src/drupal
