@@ -5,7 +5,10 @@ make:
     - docker-images
   services: 
     - mysql
+  variables:
+    - MYSQL_DATABASE: el_duderino
+    - MYSQL_ROOT_PASSWORD: EedaeJ5ewohghe9echah7ahJ
   script:
     - drush make -y --translations=fr build-8.x.make src/drupal
     - cd src/drupal
-    - drush site-install standard --db-url=mysql://dev:dev@mysql/db_drupal -y
+    - drush site-install standard --db-url=mysql://root:EedaeJ5ewohghe9echah7ahJ@mysql/el_duderino -y
