@@ -3,5 +3,8 @@ image: savoirfairelinux/lampd
 make:
   tags:
     - docker-images
+  service: mysql
   script:
-    - drush make build-8.x.make src/drupal
+    - drush make -y --translations=fr build-8.x.make src/drupal
+    - cd src/drupal
+    - drush site-install standard --db-url=mysql://dev:dev@mysql/db_drupal -y
