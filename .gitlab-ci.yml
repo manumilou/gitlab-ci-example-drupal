@@ -4,7 +4,7 @@ make:
   tags:
     - docker-images
   services: 
-    - mariadb:10.1
+    - mariadb:latest
   variables:
     MYSQL_DATABASE: el_duderino
     MYSQL_ROOT_PASSWORD: EedaeJ5ewohghe9echah7ahJ
