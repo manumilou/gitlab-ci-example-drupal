@@ -11,4 +11,4 @@ make:
   script:
     - drush make -y --translations=fr build-8.x.make src/drupal
     - cd src/drupal
-    - drush site-install standard --db-url=mysql://root:EedaeJ5ewohghe9echah7ahJ@mysql/el_duderino -y
+    - drush site-install standard --db-url=mysql://root:EedaeJ5ewohghe9echah7ahJ@mariadb/el_duderino -y
