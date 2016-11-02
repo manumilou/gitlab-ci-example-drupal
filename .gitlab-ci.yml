@@ -2,7 +2,7 @@ image: savoirfairelinux/lampd
 
 make:
   tags:
-    - docker-images
+    - docker-images-test
   services: 
     - mariadb:latest
   variables:
