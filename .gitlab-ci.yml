@@ -28,12 +28,12 @@ install:
   script:
     - drush site-install standard --db-url=mysql://root:$MYSQL_ROOT_PASSWORD@mariadb/$MYSQL_DATABASE -y
     - drush status
-    - drush sql-dump --gzip --result-file=../db_dump.sql
+    - drush sql-dump --gzip --result-file=$CI_PROJECT_DIR/src/db_dump.sql
   artifacts:
     name: "${CI_BUILD_NAME}_${CI_BUILD_REF_NAME}_${CI_BUILD_REF}"
     expire_in: '1 week'
     paths:
-      - src/db_dump.sql
+      - src/db_dump.sql.gz
 
 unittest:
   tags:
@@ -42,6 +42,8 @@ unittest:
   before_script:
     - cd $CI_PROJECT_DIR/src/drupal/core
   script:
+    - ls -l
+    - ls -l src/
     - ../vendor/bin/phpunit --testsuite=unit
     
 behat:
