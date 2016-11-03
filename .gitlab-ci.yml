@@ -43,7 +43,8 @@ unittest:
     - cd $CI_PROJECT_DIR/src/drupal/core
   script:
     - ls -l
-    - ls -l src/
+    - ls -l $CI_PROJECT_DIR/src
+    - ls -l $CI_PROJECT_DIR
     - ../vendor/bin/phpunit --testsuite=unit
     
 behat:
