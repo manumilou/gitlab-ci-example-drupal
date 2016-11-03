@@ -2,7 +2,8 @@ image: savoirfairelinux/lampd
 
 cache:
     key: "$CI_BUILD_REF_NAME"
-    untracked: true
+    paths:
+      - $CI_PROJECT_DIR/src/drupal
     
 make:
   tags:
@@ -25,9 +26,15 @@ install:
   before_script:
     - cd $CI_PROJECT_DIR/src/drupal
   script:
-    - drush site-install standard --locale="fr" --db-url=mysql://root:$MYSQL_ROOT_PASSWORD@mariadb/$MYSQL_DATABASE -y
+    - drush site-install standard --db-url=mysql://root:$MYSQL_ROOT_PASSWORD@mariadb/$MYSQL_DATABASE -y
   after_script:
     - drush status
+    - drush archive-dump --destination=src --tags="$CI_PROJECT_NAME" --tar-options="--exclude=.git"
+  artifacts:
+    name: "platform_${CI_BUILD_NAME}_${CI_BUILD_REF_NAME}_${CI_BUILD_REF}"
+    expire_in: '1 week'
+    paths:
+      - src/
 
 unittest:
   tags:
@@ -49,41 +56,44 @@ backup:
   tags:
     - docker-images-test
   stage: deploy
+  only: 
+    - master
   script:
     - ls
-  artifacts:
-    paths:
-      - src/drupal
-  when: manual
 
 offline:
   tags:
     - docker-images-test
   stage: deploy
+  only: 
+    - master
   script:
     - ls
-  when: manual
 
 rsync:
   tags:
     - docker-images-test
   stage: deploy
+  only: 
+    - master
   script:
     - ls
-  when: manual
 
 updatedb:
   tags:
     - docker-images-test
   stage: deploy
+  only: 
+    - master
   script:
     - ls
-  when: manual
 
 online:
   tags:
     - docker-images-test
   stage: deploy
+  only: 
+    - master
   script: 
     - ls
   when: manual
