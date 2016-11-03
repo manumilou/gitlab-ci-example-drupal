@@ -1,14 +1,8 @@
 image: savoirfairelinux/lampd
 
-stages: 
-  - build
-  - test
-
 cache:
     key: "$CI_BUILD_REF_NAME"
     untracked: true
-    paths:
-      - "/cache/"
     
 make:
   tags:
@@ -28,11 +22,14 @@ install:
   tags:
     - docker-images-test
   stage: build
-  script:
+  before_script:
     - cd $CI_PROJECT_DIR/src/drupal
-    - drush site-install standard --db-url=mysql://root:$MYSQL_ROOT_PASSWORD@mariadb/$MYSQL_DATABASE -y
+  script:
+    - drush site-install standard --locale="fr" --db-url=mysql://root:$MYSQL_ROOT_PASSWORD@mariadb/$MYSQL_DATABASE -y
+  after_script:
+    - drush status
 
-test:
+unittest:
   tags:
     - docker-images-test
   stage: test
@@ -41,5 +38,10 @@ test:
   script:
     - ../vendor/bin/phpunit --testsuite=unit
     
-  
+behat:
+  tags:
+    - docker-images-test
+  stage: test
+  script:
+    - ls
   
