@@ -3,13 +3,14 @@ image: savoirfairelinux/lampd
 stages: 
   - build
 
+cache:
+    key: "$CI_BUILD_STAGE/$CI_BUILD_REF_NAME"
+    untracked: true
+    
 make:
   tags:
     - docker-images-test
   stage: build
-  cache:
-    key: "$CI_BUILD_STAGE/$CI_BUILD_REF_NAME"
-    untracked: true
   script:
     - drush make -y --translations=fr build-8.x.make src/drupal
     
@@ -19,9 +20,6 @@ install:
   tags:
     - docker-images-test
   stage: build
-  cache:
-    key: "$CI_BUILD_STAGE/$CI_BUILD_REF_NAME"
-    untracked: true
   variables:
     MYSQL_DATABASE: el_duderino
     MYSQL_ROOT_PASSWORD: EedaeJ5ewohghe9echah7ahJ
