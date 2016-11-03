@@ -50,9 +50,17 @@ unittest:
 behat:
   tags:
     - docker-images-test
+  services: 
+    - mariadb:latest
+  variables:
+    MYSQL_DATABASE: $MYSQL_DATABASE
+    MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
   stage: test
+  before_script:
+    - zcat $CI_PROJECT_DIR/src/db_dump.sql.gz | mysql -uroot -p$MYSQL_ROOT_PASSWORD $MYSQL_DATABASE
+    - cd $CI_PROJECT_DIR/src/drupal/core
   script:
-    - ls
+    - ../vendor/bin/phpunit --group Drupal
   
 backup:
   tags:
