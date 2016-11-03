@@ -37,7 +37,7 @@ test:
   before_script:
     - cd $CI_PROJECT_DIR/src/drupal/core
   script:
-    - ../vendor/bin/phpunit modules/system/tests/src/Unit/Menu/SystemLocalTasksTest.php
+    - ../vendor/bin/phpunit --testsuite=unit
     
   
   
