@@ -12,7 +12,8 @@ make:
     - docker-images-test
   stage: build
   script:
-    - drush make -y --translations=fr build-8.x.make src/drupal
+    - rm -rf $CI_PROJECT_DIR/src/drupal
+    - drush make -y --translations=fr build-8.x.make $CI_PROJECT_DIR/src/drupal
     
 install:
   services: 
