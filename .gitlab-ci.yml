@@ -20,6 +20,9 @@ make:
 install:
   services: 
     - mariadb:latest
+  variables:
+    MYSQL_DATABASE: $MYSQL_DATABASE
+    MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
   tags:
     - docker-images-test
   stage: build
