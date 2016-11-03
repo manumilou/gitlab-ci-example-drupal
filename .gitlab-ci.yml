@@ -57,7 +57,7 @@ behat:
     MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
   stage: test
   before_script:
-    - zcat $CI_PROJECT_DIR/src/db_dump.sql.gz | mysql -uroot -p$MYSQL_ROOT_PASSWORD $MYSQL_DATABASE
+    - zcat $CI_PROJECT_DIR/src/db_dump.sql.gz | mysql -h mariadb -u root -p $MYSQL_ROOT_PASSWORD $MYSQL_DATABASE
     - cd $CI_PROJECT_DIR/src/drupal/core
   script:
     - ../vendor/bin/phpunit --group Drupal
