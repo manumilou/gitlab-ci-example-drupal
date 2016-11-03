@@ -28,7 +28,7 @@ install:
   script:
     - drush site-install standard --db-url=mysql://root:$MYSQL_ROOT_PASSWORD@mariadb/$MYSQL_DATABASE -y
     - drush status
-    - drush sql-dump --gzip --result-file=../db_dump.sql"
+    - drush sql-dump --gzip --result-file=../db_dump.sql
   artifacts:
     name: "${CI_BUILD_NAME}_${CI_BUILD_REF_NAME}_${CI_BUILD_REF}"
     expire_in: '1 week'
