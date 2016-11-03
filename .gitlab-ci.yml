@@ -28,12 +28,12 @@ install:
   script:
     - drush site-install standard --db-url=mysql://root:$MYSQL_ROOT_PASSWORD@mariadb/$MYSQL_DATABASE -y
     - drush status
-    - drush archive-dump --destination=src --tags="$CI_PROJECT_NAME" --tar-options="--exclude=.git"
+    - drush sql-dump --gzip --result-file=../db_dump.sql"
   artifacts:
-    name: "platform_${CI_BUILD_NAME}_${CI_BUILD_REF_NAME}_${CI_BUILD_REF}"
+    name: "${CI_BUILD_NAME}_${CI_BUILD_REF_NAME}_${CI_BUILD_REF}"
     expire_in: '1 week'
     paths:
-      - src/
+      - src/db_dump.sql
 
 unittest:
   tags:
