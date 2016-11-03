@@ -5,7 +5,7 @@ stages:
   - test
 
 cache:
-    key: "$CI_BUILD_STAGE/$CI_BUILD_REF_NAME"
+    key: "$CI_BUILD_REF_NAME"
     untracked: true
     
 make:
@@ -23,17 +23,14 @@ install:
   tags:
     - docker-images-test
   stage: build
-  variables:
-    MYSQL_DATABASE: el_duderino
-    MYSQL_ROOT_PASSWORD: EedaeJ5ewohghe9echah7ahJ
   script:
     - cd $CI_PROJECT_DIR/src/drupal
-    - drush site-install standard --db-url=mysql://root:EedaeJ5ewohghe9echah7ahJ@mariadb/el_duderino -y
+    - drush site-install standard --db-url=mysql://root:$MYSQL_ROOT_PASSWORD@mariadb/$MYSQL_DATABASE -y
 
 test:
   tags:
     - docker-images-test
-  stage: build
+  stage: test
   before_script:
     - cd $CI_PROJECT_DIR/src/drupal/core
   script:
