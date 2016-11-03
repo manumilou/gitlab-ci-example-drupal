@@ -27,7 +27,6 @@ install:
     - cd $CI_PROJECT_DIR/src/drupal
   script:
     - drush site-install standard --db-url=mysql://root:$MYSQL_ROOT_PASSWORD@mariadb/$MYSQL_DATABASE -y
-  after_script:
     - drush status
     - drush archive-dump --destination=src --tags="$CI_PROJECT_NAME" --tar-options="--exclude=.git"
   artifacts:
