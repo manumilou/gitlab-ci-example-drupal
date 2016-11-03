@@ -2,6 +2,7 @@ image: savoirfairelinux/lampd
 
 stages: 
   - build
+  - test
 
 cache:
     key: "$CI_BUILD_STAGE/$CI_BUILD_REF_NAME"
@@ -11,8 +12,9 @@ make:
   tags:
     - docker-images-test
   stage: build
-  script:
+  before_script:
     - rm -rf $CI_PROJECT_DIR/src/drupal
+  script:
     - drush make -y --translations=fr build-8.x.make $CI_PROJECT_DIR/src/drupal
     
 install:
@@ -27,3 +29,15 @@ install:
   script:
     - cd $CI_PROJECT_DIR/src/drupal
     - drush site-install standard --db-url=mysql://root:EedaeJ5ewohghe9echah7ahJ@mariadb/el_duderino -y
+
+test:
+  tags:
+    - docker-images-test
+  stage: build
+  before_script:
+    - cd $CI_PROJECT_DIR/src/drupal/core
+  script:
+    - ../vendor/bin/phpunit modules/system/tests/src/Unit/Menu/SystemLocalTasksTest.php
+    
+  
+  
