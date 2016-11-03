@@ -45,3 +45,45 @@ behat:
   script:
     - ls
   
+backup:
+  tags:
+    - docker-images-test
+  stage: deploy
+  script:
+    - ls
+  artifacts:
+    paths:
+      - src/drupal
+  when: manual
+
+offline:
+  tags:
+    - docker-images-test
+  stage: deploy
+  script:
+    - ls
+  when: manual
+
+rsync:
+  tags:
+    - docker-images-test
+  stage: deploy
+  script:
+    - ls
+  when: manual
+
+updatedb:
+  tags:
+    - docker-images-test
+  stage: deploy
+  script:
+    - ls
+  when: manual
+
+online:
+  tags:
+    - docker-images-test
+  stage: deploy
+  script: 
+    - ls
+  when: manual
