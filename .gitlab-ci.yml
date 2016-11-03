@@ -47,7 +47,7 @@ unittest:
     - ls -l $CI_PROJECT_DIR
     - ../vendor/bin/phpunit --testsuite=unit
     
-behat:
+webtest:
   tags:
     - docker-images-test
   services: 
@@ -60,7 +60,7 @@ behat:
     - zcat $CI_PROJECT_DIR/src/db_dump.sql.gz | mysql -hmariadb -uroot -p$MYSQL_ROOT_PASSWORD $MYSQL_DATABASE
     - cd $CI_PROJECT_DIR/src/drupal/core
   script:
-    - ../vendor/bin/phpunit --group Drupal
+    - ../vendor/bin/phpunit --group Drupal, Config, Entity, views
   
 backup:
   tags:
