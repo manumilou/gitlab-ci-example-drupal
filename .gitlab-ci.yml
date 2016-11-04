@@ -13,6 +13,11 @@ make:
     - rm -rf $CI_PROJECT_DIR/src/drupal
   script:
     - drush make -y --translations=fr build-8.x.make $CI_PROJECT_DIR/src/drupal
+  artifacts:
+    name: "plateform_${CI_BUILD_NAME}_${CI_BUILD_REF_NAME}_${CI_BUILD_REF}"
+    expire_in: '1 week'
+    paths:
+      - src/drupal
     
 install:
   services: 
