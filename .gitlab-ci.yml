@@ -28,6 +28,8 @@ install:
   tags:
     - docker-generic
   stage: build
+  dependencies:
+    - make
   before_script:
     - cd $CI_PROJECT_DIR/src/drupal
   script:
