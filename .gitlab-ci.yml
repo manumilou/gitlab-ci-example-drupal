@@ -7,7 +7,7 @@ cache:
     
 make:
   tags:
-    - docker-images
+    - docker-generic
   stage: build
   before_script:
     - rm -rf $CI_PROJECT_DIR/src/drupal
@@ -21,7 +21,7 @@ install:
     MYSQL_DATABASE: $MYSQL_DATABASE
     MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
   tags:
-    - docker-images
+    - docker-generic
   stage: build
   before_script:
     - cd $CI_PROJECT_DIR/src/drupal
@@ -37,7 +37,7 @@ install:
 
 unittest:
   tags:
-    - docker-images
+    - docker-generic
   stage: test
   before_script:
     - cd $CI_PROJECT_DIR/src/drupal/core
@@ -49,7 +49,7 @@ unittest:
     
 webtest:
   tags:
-    - docker-images
+    - docker-generic
   services: 
     - mariadb:latest
   variables:
@@ -64,7 +64,7 @@ webtest:
   
 backup:
   tags:
-    - docker-images
+    - docker-generic
   stage: deploy
   only: 
     - master
@@ -73,7 +73,7 @@ backup:
 
 offline:
   tags:
-    - docker-images
+    - docker-generic
   stage: deploy
   only: 
     - master
@@ -82,7 +82,7 @@ offline:
 
 rsync:
   tags:
-    - docker-images
+    - docker-generic
   stage: deploy
   only: 
     - master
@@ -91,7 +91,7 @@ rsync:
 
 updatedb:
   tags:
-    - docker-images
+    - docker-generic
   stage: deploy
   only: 
     - master
@@ -100,7 +100,7 @@ updatedb:
 
 online:
   tags:
-    - docker-images
+    - docker-generic
   stage: deploy
   only: 
     - master
