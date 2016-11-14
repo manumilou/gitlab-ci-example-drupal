@@ -27,7 +27,7 @@ make:
     
 install:
   services: 
-    - mariadb:latest
+    - mysql:latest
   variables:
     MYSQL_DATABASE: $MYSQL_DATABASE
     MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
@@ -38,7 +38,7 @@ install:
     - make
   script:
     - cd $CI_PROJECT_DIR/src/drupal
-    - drush site-install standard --db-url=mysql://root:$MYSQL_ROOT_PASSWORD@mariadb/$MYSQL_DATABASE -y
+    - drush site-install standard --db-url=mysql://root:$MYSQL_ROOT_PASSWORD@mysql/$MYSQL_DATABASE -y
     - drush status
     - drush sql-dump --gzip --result-file=$CI_PROJECT_DIR/src/db_dump.sql
   artifacts:
